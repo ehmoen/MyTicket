@@ -1,0 +1,63 @@
+﻿@page "/"
+@using MyTicket.WebApp.Shared.ViewModels
+@rendermode InteractiveServer
+@inject ViewCreatedEventsService ViewCreatedEventsService
+
+<h3>Created Events</h3>
+
+@if(_events.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Begin Time</th>
+                <th>End Time</th>
+                <th>Capacity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var eventItem in _events)
+            {
+                <tr>
+                    <td>@eventItem.Title</td>
+                    <td>@eventItem.BeginDate @eventItem.BeginTime</td>
+                    <td>@eventItem.EndDate @eventItem.EndTime</td>
+                    <td>@(eventItem.Capacity == 0 ? "Unlimited" : eventItem.Capacity)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (!string.IsNullOrWhiteSpace(_errorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @_errorMessage
+    </div>
+}
+else
+{
+    <p>No events found.</p>
+}
+
+<NavLink class="btn btn-primary" href="/events/create">
+    Create New Event
+</NavLink>
+
+@code {
+    
+    private List<EventViewModel> _events = [];
+    private string _errorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _events = await ViewCreatedEventsService.GetEventsAsync();
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = $"Error loading events: {ex.Message}";
+        }
+    }
+}
