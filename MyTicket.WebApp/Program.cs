@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyTicket.WebApp.Data;
-using MyTicket.WebApp.Features.Events.CreateEvent;
-using MyTicket.WebApp.Features.Events.ViewCreatedEvents;
+using MyTicket.WebApp.Features.CreateEvent;
+using MyTicket.WebApp.Features.ViewCreatedEvents;
 using MyTicket.WebApp.Shared;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using MyTicket.WebApp.Features.Events.CreateEvent;
+using MyTicket.WebApp.Features.CreateEvent;
 
 namespace MyTicket.WebApp.Shared.ViewModels;
 

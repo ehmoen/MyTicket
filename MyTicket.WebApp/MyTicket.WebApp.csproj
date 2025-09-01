@@ -11,6 +11,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <AdditionalFiles Include="Features\CreateEvent\CreateEventComponent.razor" />
+      <AdditionalFiles Include="Features\ViewCreatedEvents\ViewCreatedEventsComponent.razor" />
       <AdditionalFiles Include="Shared\Layout\MainLayout.razor" />
     </ItemGroup>
 

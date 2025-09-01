@@ -3,7 +3,7 @@ using MyTicket.WebApp.Data;
 using MyTicket.WebApp.Shared.Mappers;
 using MyTicket.WebApp.Shared.ViewModels;
 
-namespace MyTicket.WebApp.Features.Events.CreateEvent;
+namespace MyTicket.WebApp.Features.CreateEvent;
 
 public class CreateEventService(IDbContextFactory<ApplicationDbContext> contextFactory)
 {

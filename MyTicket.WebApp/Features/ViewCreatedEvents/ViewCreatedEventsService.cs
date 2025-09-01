@@ -4,7 +4,7 @@ using MyTicket.WebApp.Data.Entities;
 using MyTicket.WebApp.Shared.Mappers;
 using MyTicket.WebApp.Shared.ViewModels;
 
-namespace MyTicket.WebApp.Features.Events.ViewCreatedEvents;
+namespace MyTicket.WebApp.Features.ViewCreatedEvents;
 
 public class ViewCreatedEventsService(IDbContextFactory<ApplicationDbContext> contextFactory)
 {
