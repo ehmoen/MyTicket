@@ -21,6 +21,7 @@ public static class EventMapper
             EventLink = myEvent.EventLink,
             Category = myEvent.Category,
             Capacity = myEvent.Capacity,
+            ImageUrl = myEvent.ImageUrl,
             OrganizerId = myEvent.OrganizerId
         };
     }
@@ -41,6 +42,7 @@ public static class EventMapper
             EventLink = myEventViewModel.EventLink,
             Category = myEventViewModel.Category,
             Capacity = myEventViewModel.Capacity,
+            ImageUrl = myEventViewModel.ImageUrl,
             OrganizerId = myEventViewModel.OrganizerId
         };
     }

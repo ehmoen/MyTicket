@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Components.Forms;
 using MyTicket.WebApp.Features.CreateEvent;
 
 namespace MyTicket.WebApp.Shared.ViewModels;
@@ -37,6 +38,11 @@ public class EventViewModel
     [Range(0, int.MaxValue)]
     public int Capacity { get; set; }
 
+    [Required(ErrorMessage = "Please upload a cover image for the event.")]
+    public IBrowserFile CoverImage { get; set; }
+    
+    public string? ImageUrl { get; set; } = $"images/placeholder_300x169.png";
+    
     public int OrganizerId { get; set; }
 
 
@@ -47,7 +53,6 @@ public class EventViewModel
         BeginTime = TimeOnly.FromDateTime(DateTime.Now);
         EndTime = TimeOnly.FromDateTime(DateTime.Now);
         
-        Category = nameof(EventCategoriesEnum.InPerson);
     }
     
     public string? ValidateDates()

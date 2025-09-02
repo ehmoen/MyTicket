@@ -9,18 +9,29 @@
 {
     <table class="table">
         <thead>
-            <tr>
-                <th>Title</th>
-                <th>Begin Time</th>
-                <th>End Time</th>
-                <th>Capacity</th>
-            </tr>
+        <tr>
+            <th>Title</th>
+            <th>Begin Time</th>
+            <th>End Time</th>
+            <th>Capacity</th>
+        </tr>
         </thead>
         <tbody>
             @foreach (var eventItem in _events)
             {
                 <tr>
-                    <td>@eventItem.Title</td>
+                    <td style="text-align: center;">
+                        @if (!string.IsNullOrWhiteSpace(eventItem.ImageUrl))
+                        {
+                            <img src="@eventItem.ImageUrl" alt="Event Image" style="width: 100px; height: auto;" />
+                        }
+                        else
+                        {
+                            <img src="images/placeholder_300x169.png" alt="Event Image" style="width: 100px; height: auto;" />
+                        }
+                        <br />
+                        @eventItem.Title
+                    </td>
                     <td>@eventItem.BeginDate @eventItem.BeginTime</td>
                     <td>@eventItem.EndDate @eventItem.EndTime</td>
                     <td>@(eventItem.Capacity == 0 ? "Unlimited" : eventItem.Capacity)</td>

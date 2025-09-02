@@ -35,5 +35,8 @@ public class Event
     [Range(0, int.MaxValue)]
     public int Capacity { get; set; }
 
+    [Required]
+    public string? ImageUrl { get; set; } 
+    
     public int OrganizerId { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿namespace MyTicket.WebApp.Features.CreateEvent;
+﻿namespace MyTicket.WebApp.Shared;
 
 public enum EventCategoriesEnum
 {
