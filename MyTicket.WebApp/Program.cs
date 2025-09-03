@@ -6,6 +6,7 @@ using MyTicket.WebApp.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddTransient<SharedHelper>();
 builder.Services.AddTransient<CreateEventService>();
 builder.Services.AddTransient<ViewCreatedEventsService>();
 

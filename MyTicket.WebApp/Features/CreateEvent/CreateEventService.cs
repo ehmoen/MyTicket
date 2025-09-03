@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyTicket.WebApp.Data;
-using MyTicket.WebApp.Shared;
 using MyTicket.WebApp.Shared.Mappers;
 using MyTicket.WebApp.Shared.ViewModels;
 
@@ -60,10 +59,5 @@ public class CreateEventService(IDbContextFactory<ApplicationDbContext> contextF
 
         return string.Empty;
     }
-    
-    // Return a list of categories based on the enum in Shared/EventCategoriesEnum.cs
-    public List<string> GetEventCategories()
-    {
-        return Enum.GetNames<EventCategoriesEnum>().ToList();
-    }
+
 }
