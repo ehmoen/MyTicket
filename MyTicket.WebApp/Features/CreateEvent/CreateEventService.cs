@@ -25,39 +25,4 @@ public class CreateEventService(IDbContextFactory<ApplicationDbContext> contextF
         }
         
     }
-    
-    
-    
-    
-    public string? ValidateEvent(EventViewModel? eventViewModel)
-    {
-        if (eventViewModel == null)
-        {
-            return "Event data is required.";
-        }
-
-        string? errorMessage = string.Empty;
-
-
-        errorMessage = eventViewModel.ValidateDates();
-        if (!string.IsNullOrWhiteSpace(errorMessage))
-        {
-            return errorMessage;
-        }
-
-        errorMessage = eventViewModel.ValidateLocation();
-        if (!string.IsNullOrWhiteSpace(errorMessage))
-        {
-            return errorMessage;
-        }
-
-        errorMessage = eventViewModel.ValidateEventLink();
-        if (!string.IsNullOrWhiteSpace(errorMessage))
-        {
-            return errorMessage;
-        }
-
-        return string.Empty;
-    }
-
 }

@@ -11,6 +11,7 @@ public static class EventMapper
 
         return new EventViewModel
         {
+            EventId = myEvent.EventId,
             Title = myEvent.Title,
             Description = myEvent.Description,
             BeginDate = myEvent.BeginDate,
@@ -32,6 +33,7 @@ public static class EventMapper
 
         return new Event
         {
+            EventId = myEventViewModel.EventId,
             Title = myEventViewModel.Title,
             Description = myEventViewModel.Description,
             BeginDate = myEventViewModel.BeginDate,

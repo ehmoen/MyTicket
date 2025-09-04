@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using MyTicket.WebApp.Data;
 using MyTicket.WebApp.Features.CreateEvent;
+using MyTicket.WebApp.Features.DeleteEvent;
+using MyTicket.WebApp.Features.EditEvent;
 using MyTicket.WebApp.Features.ViewCreatedEvents;
 using MyTicket.WebApp.Shared;
 
@@ -9,6 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<SharedHelper>();
 builder.Services.AddTransient<CreateEventService>();
 builder.Services.AddTransient<ViewCreatedEventsService>();
+builder.Services.AddTransient<EditEventService>();
+builder.Services.AddTransient<DeleteEventService>();
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

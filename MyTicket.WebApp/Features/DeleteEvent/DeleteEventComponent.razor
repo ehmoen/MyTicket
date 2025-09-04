@@ -1,0 +1,52 @@
+﻿@inject NavigationManager NavigationManager
+@inject DeleteEventService DeleteEventService
+
+<ErrorMessageComponent ErrorMessage="@_errorMessage"></ErrorMessageComponent>
+
+<button class="@ButtonClass" @onclick="HandleDelete">
+    Delete
+</button>
+
+<ConfirmDialogComponent @ref="_confirmDialogComponent"></ConfirmDialogComponent>
+
+@code {
+    [Parameter]
+    public string? ButtonClass { get; set; }    
+    
+    [Parameter]
+    public EventViewModel? EventViewModel { get; set; }
+    
+    ConfirmDialogComponent? _confirmDialogComponent;
+
+    private string? _errorMessage;
+    
+    private void HandleDelete()
+    {
+        _confirmDialogComponent?.Show($"Are you sure you want to delete this event: {@EventViewModel?.Title}?", async void () =>
+        {
+            try
+            {
+                if(!DeleteEventService.IsEventDeletable(EventViewModel?.EventId))
+                {
+                    _errorMessage = "Event cannot be deleted because the event has already happened.";
+                    StateHasChanged();
+                    return;
+                }
+                
+                if (await DeleteEventService.DeleteEventAsync(EventViewModel?.EventId))
+                {
+                    NavigationManager.NavigateTo("/", forceLoad: true);
+                }
+                else
+                {
+                    _errorMessage = "Error deleting event. Please try again.";
+                    StateHasChanged();
+                }
+            }
+            catch (Exception e)
+            {
+                _errorMessage = "Something went wrong. Please try again.";
+            }
+        });
+    }
+}

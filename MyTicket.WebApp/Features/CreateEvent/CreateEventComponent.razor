@@ -20,7 +20,7 @@
 
     private async Task CreateEvent()
     {
-        _errorMessage = CreateEventService.ValidateEvent(_eventViewModel);
+        _errorMessage = _eventViewModel.ValidateEvent();
 
         if (!string.IsNullOrWhiteSpace(_errorMessage))
         {

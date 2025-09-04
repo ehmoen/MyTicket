@@ -38,7 +38,6 @@ public class EventViewModel
     [Range(0, int.MaxValue)]
     public int Capacity { get; set; }
 
-    [Required(ErrorMessage = "Please upload a cover image for the event.")]
     public IBrowserFile CoverImage { get; set; }
     
     public string? ImageUrl { get; set; } = $"images/placeholder_300x169.png";
@@ -55,7 +54,49 @@ public class EventViewModel
         
     }
     
-    public string? ValidateDates()
+    public string? ValidateEvent()
+    {
+        string? errorMessage = string.Empty;
+
+
+        errorMessage = ValidateDates();
+        if (!string.IsNullOrWhiteSpace(errorMessage))
+        {
+            return errorMessage;
+        }
+
+        errorMessage = ValidateLocation();
+        if (!string.IsNullOrWhiteSpace(errorMessage))
+        {
+            return errorMessage;
+        }
+
+        errorMessage = ValidateEventLink();
+        if (!string.IsNullOrWhiteSpace(errorMessage))
+        {
+            return errorMessage;
+        }
+        
+        errorMessage = ValidateCoverImage();
+        if (!string.IsNullOrWhiteSpace(errorMessage))
+        {
+            return errorMessage;
+        }
+
+        return string.Empty;
+    }
+    
+    private string? ValidateCoverImage()
+    {
+        if (CoverImage == null && EventId <= 0)
+        {
+            return "Cover image is required.";
+        }
+
+        return string.Empty;
+    }
+    
+    private string? ValidateDates()
     {
         DateTime beginDateTime = BeginDate.ToDateTime(BeginTime);
         DateTime endDateTime = EndDate.ToDateTime(EndTime);
@@ -68,7 +109,7 @@ public class EventViewModel
         return string.Empty;
     }
     
-    public string? ValidateLocation()
+    private string? ValidateLocation()
     {
         if (Category == nameof(EventCategoriesEnum.InPerson) && string.IsNullOrWhiteSpace(Location))
         {
@@ -78,7 +119,7 @@ public class EventViewModel
         return string.Empty;
     }
     
-    public string? ValidateEventLink()
+    private string? ValidateEventLink()
     {
         if (Category == nameof(EventCategoriesEnum.Online) && string.IsNullOrWhiteSpace(EventLink))
         {

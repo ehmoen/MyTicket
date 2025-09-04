@@ -1,0 +1,61 @@
+﻿@if (_showDialog)
+{
+    <div class="modal show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm</h5>
+                    <button type="button" 
+                            class="btn-close" 
+                            @onclick="Cancel"
+                            data-bs-dismiss="modal" 
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>@_confirmMessage</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-secondary"
+                            @onclick="Cancel"
+                            data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button"
+                            class="btn btn-primary"
+                            @onclick="Confirm">
+                        Yes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private bool _showDialog;
+    private string? _confirmMessage;
+    private Action? _onConfirm;
+    
+    public void Show(string message, Action onConfirm)
+    {
+        _onConfirm = onConfirm;
+        _showDialog = true;
+        _confirmMessage = message;
+        StateHasChanged();
+    }
+    
+    private void Cancel()
+    {
+        _showDialog = false;
+        _confirmMessage = null;
+    }
+
+    private void Confirm()
+    {
+        _showDialog = false;
+        _confirmMessage = null;
+        _onConfirm?.Invoke();
+    }
+
+}

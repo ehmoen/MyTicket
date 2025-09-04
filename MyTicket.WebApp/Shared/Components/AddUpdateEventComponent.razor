@@ -107,7 +107,16 @@
 
         <br/>
 
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">
+            @if(EventViewModel.EventId > 0)
+            {
+                <span>Save</span>
+            }
+            else
+            {
+                <span>Create</span>
+            }
+        </button>
         <NavLink class="btn btn-secondary" href="/">Cancel</NavLink>
     </EditForm>
 }

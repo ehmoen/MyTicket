@@ -1,0 +1,71 @@
+﻿@page "/events/edit/{EventId:int}"
+@using MyTicket.WebApp.Shared.ViewModels
+@rendermode InteractiveServer
+@inject EditEventService EditEventService
+@inject NavigationManager NavigationManager
+
+<h3>Edit Event</h3>
+
+@if (_eventViewModel != null)
+{
+    <AddUpdateEventComponent EventViewModel="@_eventViewModel" OnEventSaved="UpdateEvent" ErrorMessage="_errorMessage">
+        <ErrorMessageFragment>
+            <ErrorMessageComponent ErrorMessage="@_errorMessage"></ErrorMessageComponent>
+        </ErrorMessageFragment>
+    </AddUpdateEventComponent>
+    <br/>
+    <DeleteEventComponent ButtonClass="btn btn-danger" EventViewModel="_eventViewModel"></DeleteEventComponent>
+}
+else
+{
+    <p>Loading event details...</p>
+    @* <ErrorMessageComponent ErrorMessage="Event not found."></ErrorMessageComponent> *@
+}
+
+
+
+
+@code {
+    private EventViewModel? _eventViewModel;
+    
+    //ConfirmDialogComponent? _confirmDialogComponent;
+    
+    private string? _errorMessage = string.Empty;
+
+    [Parameter]
+    public int EventId { get; set; }
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _eventViewModel = await EditEventService.GetEventByIdAsync(EventId);
+            StateHasChanged();
+        }
+            
+    }
+
+    private async Task UpdateEvent()
+    {
+        if (_eventViewModel == null)
+        {
+            _errorMessage = "Updated event data is null.";
+            return;
+        }
+
+        _errorMessage = _eventViewModel.ValidateEvent();
+
+        if (!string.IsNullOrWhiteSpace(_errorMessage))
+        {
+            return;
+        }
+
+        await EditEventService.UpdateEventAsync(_eventViewModel);
+
+        // Optionally, navigate back to the list of created events or show a success message
+        NavigationManager.NavigateTo("/");
+    }
+    
+
+
+}
