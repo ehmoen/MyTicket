@@ -26,11 +26,11 @@
                         <a href="/events/edit/@eventItem.EventId">
                             @if (!string.IsNullOrWhiteSpace(eventItem.ImageUrl))
                             {
-                                <img src="@eventItem.ImageUrl" alt="Event Image" style="width: 100px; height: auto;"/>
+                                <img src="@eventItem.ImageUrl" class="img-thumbnail" alt="Event Image" style="width: 100px; height: auto;"/>
                             }
                             else
                             {
-                                <img src="images/placeholder_300x169.png" alt="Event Image" style="width: 100px; height: auto;"/>
+                                <img src="/images/placeholder_300x169.png" class="img-thumbnail" alt="Event Image" style="width: 100px; height: auto;"/>
                             }
                             <br/>
                             @eventItem.Title 

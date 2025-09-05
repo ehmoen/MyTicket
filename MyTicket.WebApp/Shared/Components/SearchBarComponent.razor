@@ -1,0 +1,29 @@
+﻿@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<div class="d-flex" role="search">
+    <input type="search" 
+           class="form-control me-2" 
+           placeholder="Search" 
+           aria-label="Search"
+           @bind-value="@_searchQuery" />
+    <button type="button" class="btn @ButtonClass" @onclick="Search">
+        Search
+    </button>
+</div>
+
+@code {
+    [Parameter]
+    public string? SearchUrl { get; set; }
+    
+    [Parameter]
+    public string? ButtonClass { get; set; }
+
+    private string _searchQuery;
+    
+    private void Search()
+    {
+        NavigationManager.NavigateTo($"/{SearchUrl}?search={_searchQuery}", forceLoad: true); 
+    }
+
+}

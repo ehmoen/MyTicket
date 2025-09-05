@@ -40,7 +40,7 @@ public class EventViewModel
 
     public IBrowserFile CoverImage { get; set; }
     
-    public string? ImageUrl { get; set; } = $"images/placeholder_300x169.png";
+    public string? ImageUrl { get; set; } = $"/images/placeholder_300x169.png";
     
     public int OrganizerId { get; set; }
 

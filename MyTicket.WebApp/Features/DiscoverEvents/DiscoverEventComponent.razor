@@ -1,0 +1,52 @@
+﻿@page "/events"
+@rendermode InteractiveServer
+@using System.Web
+
+@inject NavigationManager NavigationManager
+@inject DiscoverEventService DiscoverEventService
+
+<h3>Events</h3>
+
+<div class="container">
+    <div class="row g-3">
+
+        @if (_events is not null && _events.Any())
+        {
+            @foreach (var ev in _events)
+            {
+                var eventImage = ev?.ImageUrl;
+                if(string.IsNullOrWhiteSpace(ev?.ImageUrl))
+                {
+                    eventImage = "/images/placeholder_300x169.png";
+                }
+            
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="card">
+                        <img src="@eventImage" alt="Event Image"/>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                @ev.Title
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+</div>
+
+@code {
+
+    private List<EventViewModel?> _events;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var uri = new Uri(NavigationManager.Uri);
+        var query = HttpUtility.ParseQueryString(uri.Query);
+        var searchFilter = query.Get("search");
+
+        _events = await DiscoverEventService.GetEventsAsync(searchFilter);
+    }
+
+}
